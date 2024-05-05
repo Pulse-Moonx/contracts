@@ -2,11 +2,13 @@
 pragma solidity ^0.8.20;
 import "./PulseToken.sol";
                                
+/**
  _ __ ___   ___   ___  _ __ __  __
 | '_ ` _ \ / _ \ / _ \| '_ \\ \/ /
 | | | | | | (_) | (_) | | | |>  < 
 |_| |_| |_|\___/ \___/|_| |_/_/\_\
-                                  
+
+**/                                
 
 contract PulseProtocol {
     PulseToken public pulseToken;
@@ -54,16 +56,16 @@ contract PulseProtocol {
         emit ActivityCompleted(_address);
     }
 
-    function mintToken() external activityDeadlinePassed {
+    function mintToken(address _address) external activityDeadlinePassed {
         if (!activityCompleted) {
             revert("Activity not completed");
         }
-        if (!eligibility[msg.sender]) {
+        if (!eligibility[_address]) {
             revert("Address not eligible to mint token");
         }
 
-        pulseToken.mint(msg.sender, 1);
-        emit TokenMinted(msg.sender);
+        pulseToken.mint(_address, 1);
+        emit TokenMinted(_address);
     }
 
     function setEligibility(address _address, bool _eligible) external {

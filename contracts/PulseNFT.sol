@@ -5,10 +5,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract PulseNFT is ERC721, ERC721URIStorage, Ownable {
-    constructor(address initialOwner)
-        ERC721("Pulse Token", "PSTK")
-        Ownable(initialOwner)
+contract PulseNFT is ERC721, ERC721URIStorage {
+    constructor()
+        ERC721("Pulse NFT", "PSNFT")
     {}
 
     function _baseURI() internal pure override returns (string memory) {
@@ -17,7 +16,6 @@ contract PulseNFT is ERC721, ERC721URIStorage, Ownable {
 
     function safeMint(address to, uint256 tokenId, string memory uri)
         public
-        onlyOwner
     {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
